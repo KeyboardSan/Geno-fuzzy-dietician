@@ -1,0 +1,19 @@
+{
+  "name": "geno-fuzzy-dietician",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhongadeaakash/Geno-fuzzy-dietician.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhongadeaakash/Geno-fuzzy-dietician/issues"
+  },
+  "homepage": "https://github.com/dhongadeaakash/Geno-fuzzy-dietician#readme"
+}
