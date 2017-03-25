@@ -7,10 +7,17 @@ nav
 					ul.right.hide-on-med-and-down
 						li
 							a(href='/')  About  Us
+						li
+							if(user)
+								a(href='/logout')  Logout
+
 					ul#mobile-demo.side-nav
 						li
 								a(href='/')
 									h5#DrawerHeading.text-darken-2  Geno-Fuzzy-Dietician
 						li
-							a(href='/login')  Login  /  Sign  Up
+							if(!user)
+								a(href='/login')  Login  /  Sign  Up
+							if(user)
+								a(href='/logout')  Logout
 							a(href='/')  About  Us
