@@ -1,0 +1,17 @@
+{
+  "name": "geno-fuzzy-dietician",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Aakash Dhongade <dhongadeaakash@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/dhongadeaakash/Geno-fuzzy-dietician",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

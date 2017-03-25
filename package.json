@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/dhongadeaakash/Geno-fuzzy-dietician/issues"
   },
-  "homepage": "https://github.com/dhongadeaakash/Geno-fuzzy-dietician#readme"
+  "homepage": "https://github.com/dhongadeaakash/Geno-fuzzy-dietician#readme",
+  "dependencies": {
+    "jade": "^1.11.0",
+    "pug": "^0.1.0"
+  }
 }

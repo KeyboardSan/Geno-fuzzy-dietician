@@ -1,0 +1,16 @@
+#DrawerHeading a
+{
+  color: rgba(0, 0, 0, 0.87);
+}
+.card-margin
+{
+  margin-top: 15px;
+}
+.modalheighthack
+{
+	max-height: 100%;
+}
+.modalheight
+{
+	max-height:100%
+}
