@@ -1,0 +1,36 @@
+extends ./includes/layout
+block main
+	.row
+		.col.s12
+			p Awesome!! Just have a look at these values, change any if you prefer and do select the type of food you would like to have!
+	.row
+		.col.s12		
+			.card.card-margin
+				.card-content
+					form(action="/calculatediet" method="post")
+						.row
+							.col.s12.input-field.inline		
+								//- - console.log(user.profile.height)
+								input#height(type='number' name="height" value=user.profile.height)
+								label(for='height') Height
+						.row
+							.col.s12.input-field.inline				
+								input#weight(type='number' name="weight" value=user.profile.weight)
+								label(for='weight') Weight
+						.row
+							.col.s12.input-field.inline				
+								input#age(type='number' name="age" value=user.profile.age)
+								label(for='age') Age
+						.row
+							.col.s12.input-field.inline				
+								.input-field.col.s12
+									select(multiple='' name="ethnicity")
+										option(value='', disabled='', selected='') Ethnicity
+										option(value='North') North
+										option(value='South') South
+										option(value='East') East
+										option(value='West') West
+									label(for='ethnicity') Food of which ethincity would you like to have?
+
+
+						button.btn-flat.modal-action.waves-effect.waves-green.blue-text(type="submit") Calulate

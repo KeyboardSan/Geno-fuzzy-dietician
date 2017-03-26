@@ -15,6 +15,7 @@ const app=express()
 //creating controllers.
 const homeController = require('./server/controllers/home');
 const userController = require('./server/controllers/users');
+const dietController = require('./server/controllers/diet');
 
 var passportConf = require('./server/config/passport');
 
@@ -54,8 +55,10 @@ app.get('/',homeController.getIndex);
 app.post('/signup',userController.postSignup)
 app.post('/login',userController.postLogin)
 app.get('/logout',userController.getLogout)
-
-
+app.get('/uploadrawfood',homeController.getUploadRawFood)
+app.get('/viewdiet',dietController.getDiet)
+app.get('/calculatediet',dietController.getCalculateDiet)
+app.post('/calculatediet',dietController.postCalculateDiet)
 
 app.listen(PORT)
 console.log("Server started on port ",PORT);

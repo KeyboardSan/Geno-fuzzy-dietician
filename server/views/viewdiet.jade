@@ -1,0 +1,38 @@
+extends ./includes/layout
+block main	
+	.row
+		.col.s12(style="text-align:center")
+			h5 My Diet for {Date}
+	.row
+		.col.s12
+			ul.collapsible(data-collapsible='expandable')
+				li
+					.collapsible-header
+						//- i.material-icons play_arrow
+						| Early BreakFast
+					.collapsible-body
+						span Lorem ipsum dolor sit amet.
+				li
+					.collapsible-header
+						//- i.material-icons play_arrow
+						| Breakfast
+					.collapsible-body
+						span Lorem ipsum dolor sit amet.
+				li
+					.collapsible-header
+						//- i.material-icons play_arrow
+						| Lunch
+					.collapsible-body
+						span Lorem ipsum dolor sit amet.
+				li
+					.collapsible-header
+						//- i.material-icons play_arrow
+						| Snacks
+					.collapsible-body
+						span Lorem ipsum dolor sit amet.
+				li
+					.collapsible-header
+						//- i.material-icons play_arrow
+						| Dinner
+					.collapsible-body
+						span Lorem ipsum dolor sit amet.

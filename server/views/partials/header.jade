@@ -7,17 +7,35 @@ nav
 					ul.right.hide-on-med-and-down
 						li
 							a(href='/')  About  Us
-						li
-							if(user)
-								a(href='/logout')  Logout
-
+						if(user)
+							li
+									a(href='/logout')  Logout
+							li
+									a(href='/viewdiet') My Diet
+							li
+									a(href='/calculatediet') Calculate My Diet
+							//- combined online one and my code
 					ul#mobile-demo.side-nav
 						li
-								a(href='/')
-									h5#DrawerHeading.text-darken-2  Geno-Fuzzy-Dietician
-						li
-							if(!user)
-								a(href='/login')  Login  /  Sign  Up
 							if(user)
-								a(href='/logout')  Logout
+								.userView
+									.background
+										img(src='images/office.jpg')
+									a(href="#!user")
+										img.circle(src="images/dummy.jpg")
+									a(href="#!name")
+										span.white-text.name #{user.profile.fname} #{user.profile.lname}
+									a(href="#!email")
+										span.white-text.email #{user.email}
+						li
 							a(href='/')  About  Us
+						if(user)
+							li
+									a(href='/logout')  Logout
+							li
+									a(href='/viewdiet') My Diet
+							li
+										a(href='/calculatediet') Calculate My Diet
+			
+
+
