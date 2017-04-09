@@ -1,10 +1,14 @@
 var _ = require('lodash')
 var Fuzzy = require('./core/fuzzy')
 var Genetic = require('./core/genetic')
+const UserDiet = require('../models/UserDiet')
+
 exports.getDiet = function(req, res) {
     //fetcht the data and display..
 
-    res.render('viewdiet')
+    UserDiet.findOne({userId:req.user._id},function(err,user){
+        res.render('viewdiet',{diet:user.current})
+    })
 }
 
 exports.getCalculateDiet = function(req, res) {
@@ -18,8 +22,12 @@ exports.postCalculateDiet = function(req, res) {
     // consider if user doesn`t enter all. then fetch values from database.
 
     // console.log(req.body.ethnicity)
-    ethnicity = ethnicity.concat(req.body.ethnicity)
-        // console.log(ethnicity)
+    if (req.body.ethnicity) {
+        ethnicity = ethnicity.concat(req.body.ethnicity)
+    } else {
+        ethnicity = req.user.profile.ethnicity
+            // console.log(req.user)
+    }
 
 
     // send the response here if execution time is long
@@ -41,23 +49,38 @@ exports.postCalculateDiet = function(req, res) {
     // Start fuzzification to get the value of BMR2 based on the value of user`s activity.
     var fuzzy = new Fuzzy()
     var BMR = fuzzy.fuzzify(BMR1, req.user)
+    
         // console.log(req.user)
+
     var TC = BMR
-    switch (req.user.goal) {
+    switch (req.user.profile.goal) {
         case 'LF':
-            TC = BMR - 400
+            req.user.profile.TC = BMR - 400
+            req.user.profile.TF = 0.60 * req.user.profile.TC * 0.12959782
+            req.user.profile.TP = 0.35 * req.user.profile.TC * 0.12959782
+            req.user.profile.TCC = 0.05 * req.user.profile.TC * 0.12959782
             break;
         case 'LM':
-            TC = BMR + 100
+            req.user.profile.TC = BMR + 100
+            req.user.profile.TF = 0.25 * req.user.profile.TC * 0.12959782
+            req.user.profile.TP = 0.35 * req.user.profile.TC * 0.12959782
+            req.user.profile.TCC = 0.45 * req.user.profile.TC * 0.12959782
             break;
         case 'MM':
-            TC = BMR
+            req.user.profile.TC = BMR
+            req.user.profile.TF = 0.30 * req.user.profile.TC * 0.12959782
+            req.user.profile.TP = 0.30 * req.user.profile.TC * 0.12959782
+            req.user.profile.TCC = 0.40 * req.user.profile.TC * 0.12959782
             break;
         default:
+            console.log("default category")
     }
-    console.log('TC=' + TC);
-    
-    var genetic = new Genetic(req.user,TC)
-    diet=genetic.calculate()
+
+    // // converting calories to grams as stored in database as 1 calorie is 129.59782 grams.
+    // console.log("Diet details are")
+    // console.log(req.user.profile)
+
+    var genetic = new Genetic(req.user, ethnicity,res)
+    diet = genetic.calculate()
 
 }

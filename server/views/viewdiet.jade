@@ -1,5 +1,6 @@
 extends ./includes/layout
 block main	
+	- console.log(diet)
 	.row
 		.col.s12(style="text-align:center")
 			h5 My Diet for {Date}
@@ -11,28 +12,154 @@ block main
 						//- i.material-icons play_arrow
 						| Early BreakFast
 					.collapsible-body
-						span Lorem ipsum dolor sit amet.
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Name
+							.col.s8
+								h6 #{diet.eb.name}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Calories
+							.col.s8
+								h6 #{diet.eb.calories}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Carbohydrates
+							.col.s8
+								h6 #{diet.eb.carbohydrates}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Fats
+							.col.s8
+								h6 #{diet.eb.fats}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Protein
+							.col.s8
+								h6 #{diet.eb.protein}
+
+
+
 				li
 					.collapsible-header
 						//- i.material-icons play_arrow
 						| Breakfast
 					.collapsible-body
-						span Lorem ipsum dolor sit amet.
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Name
+							.col.s8
+								h6 #{diet.b.name}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Calories
+							.col.s8
+								h6 #{diet.b.calories}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Carbohydrates
+							.col.s8
+								h6 #{diet.b.carbohydrates}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Fats
+							.col.s8
+								h6 #{diet.b.fats}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Protein
+							.col.s8
+								h6 #{diet.b.protein}
+
 				li
 					.collapsible-header
 						//- i.material-icons play_arrow
 						| Lunch
 					.collapsible-body
-						span Lorem ipsum dolor sit amet.
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Name
+							.col.s8
+								h6 #{diet.l.name}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Calories
+							.col.s8
+								h6 #{diet.l.calories}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Carbohydrates
+							.col.s8
+								h6 #{diet.l.carbohydrates}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Fats
+							.col.s8
+								h6 #{diet.l.fats}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Protein
+							.col.s8
+								h6 #{diet.l.protein}
+
 				li
 					.collapsible-header
 						//- i.material-icons play_arrow
 						| Snacks
 					.collapsible-body
-						span Lorem ipsum dolor sit amet.
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Name
+							.col.s8
+								h6 #{diet.s.name}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Calories
+							.col.s8
+								h6 #{diet.s.calories}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Carbohydrates
+							.col.s8
+								h6 #{diet.s.carbohydrates}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Fats
+							.col.s8
+								h6 #{diet.s.fats}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Protein
+							.col.s8
+								h6 #{diet.s.protein}
+
 				li
 					.collapsible-header
 						//- i.material-icons play_arrow
 						| Dinner
 					.collapsible-body
-						span Lorem ipsum dolor sit amet.
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Name
+							.col.s8
+								h6 #{diet.d.name}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Calories
+							.col.s8
+								h6 #{diet.d.calories}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Carbohydrates
+							.col.s8
+								h6 #{diet.d.carbohydrates}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Fats
+							.col.s8
+								h6 #{diet.d.fats}
+						.row.viewdietzeromargin
+							.col.s4
+								h6 Protein
+							.col.s8
+								h6 #{diet.d.protein}

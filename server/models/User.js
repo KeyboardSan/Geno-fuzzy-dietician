@@ -19,6 +19,7 @@ var userSchema = new mongoose.Schema({
     allergies:[String],
     activity:String,
     goal: String
+
   },
 
   resetPasswordToken: String,

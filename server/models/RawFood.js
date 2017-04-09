@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var rawFoodSchema= new mongoose.Schema({
 	name:String,
-	calories:String,
+	calories:Number,
 	protein:Number,
 	carbohydrates:Number,
 	fats:Number,
