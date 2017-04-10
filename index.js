@@ -59,6 +59,9 @@ app.get('/uploadrawfood',homeController.getUploadRawFood)
 app.get('/viewdiet',dietController.getDiet)
 app.get('/calculatediet',dietController.getCalculateDiet)
 app.post('/calculatediet',dietController.postCalculateDiet)
+app.get('/removenow/:id',dietController.getRemoveNow)
+
+
 
 app.listen(PORT)
 console.log("Server started on port ",PORT);

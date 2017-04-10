@@ -1,16 +1,27 @@
 extends ./includes/layout
 block main	
-	- console.log(diet)
 	.row
 		.col.s12(style="text-align:center")
-			h5 My Diet for {Date}
+			h5 My Diet for #{diet.date}
 	.row
 		.col.s12
 			ul.collapsible(data-collapsible='expandable')
 				li
 					.collapsible-header
-						//- i.material-icons play_arrow
-						| Early BreakFast
+						.row.viewdietzeromargin
+							.col.s4
+								| Early BreakFast
+							.col.s2.offset-s6
+								a.waves-effect.waves-light(href='#modal1') 
+									i.material-icons close
+								#modal1.modal
+									.modal-content
+										p Disard #{diet.eb.name}
+
+									.modal-footer
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removenow/'+'#{diet.eb._id}') For Now
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removeforever/'+'#{diet.eb._id}') For Ever
+
 					.collapsible-body
 						.row.viewdietzeromargin
 							.col.s4
@@ -42,8 +53,20 @@ block main
 
 				li
 					.collapsible-header
-						//- i.material-icons play_arrow
-						| Breakfast
+						.row.viewdietzeromargin
+							.col.s4
+								| BreakFast
+							.col.s2.offset-s6
+								a.waves-effect.waves-light(href='#modal2') 
+									i.material-icons close
+								#modal2.modal
+									.modal-content
+										p Disard #{diet.b.name}
+
+									.modal-footer
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removenow/'+'#{diet.b._id}') For Now
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removeforever/'+'#{diet.b._id}') For Ever
+
 					.collapsible-body
 						.row.viewdietzeromargin
 							.col.s4
@@ -73,8 +96,19 @@ block main
 
 				li
 					.collapsible-header
-						//- i.material-icons play_arrow
-						| Lunch
+						.row.viewdietzeromargin
+							.col.s4
+								| Lunch
+							.col.s2.offset-s6
+								a.waves-effect.waves-light(href='#modal3') 
+									i.material-icons close
+								#modal3.modal
+									.modal-content
+										p Disard #{diet.l.name}
+
+									.modal-footer
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removenow/'+'#{diet.l._id}') For Now
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removeforever/'+'#{diet.l._id}') For Ever
 					.collapsible-body
 						.row.viewdietzeromargin
 							.col.s4
@@ -104,8 +138,19 @@ block main
 
 				li
 					.collapsible-header
-						//- i.material-icons play_arrow
-						| Snacks
+						.row.viewdietzeromargin
+							.col.s4
+								| Snacks
+							.col.s2.offset-s6
+								a.waves-effect.waves-light(href='#modal5') 
+									i.material-icons close
+								#modal5.modal
+									.modal-content
+										p Disard #{diet.s.name}
+
+									.modal-footer
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removenow/'+'#{diet.s._id}') For Now
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removeforever/'+'#{diet.s._id}') For Ever
 					.collapsible-body
 						.row.viewdietzeromargin
 							.col.s4
@@ -135,8 +180,19 @@ block main
 
 				li
 					.collapsible-header
-						//- i.material-icons play_arrow
-						| Dinner
+						.row.viewdietzeromargin
+							.col.s4
+								| Dinner
+							.col.s2.offset-s6
+								a.waves-effect.waves-light(href='#modal4') 
+									i.material-icons close
+								#modal4.modal
+									.modal-content
+										p Disard #{diet.d.name}
+
+									.modal-footer
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removenow/'+'#{diet.d._id}') For Now
+										a.modal-action.modal-close.waves-effect.waves-green.btn-flat(href='/removeforever/'+'#{diet.d._id}') For Ever
 					.collapsible-body
 						.row.viewdietzeromargin
 							.col.s4

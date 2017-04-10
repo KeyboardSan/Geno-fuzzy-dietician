@@ -10,6 +10,7 @@ var userDietSchema = new mongoose.Schema({
         TotalProtein: Number,
         TotalCalorie: Number,
         d: {
+            _id: String,
             name: String,
             calories: Number,
             protein: Number,
@@ -19,6 +20,7 @@ var userDietSchema = new mongoose.Schema({
             sodium: Number,
         },
         eb: {
+            _id: String,
              name: String,
             calories: Number,
             protein: Number,
@@ -29,6 +31,7 @@ var userDietSchema = new mongoose.Schema({
         },
 
         b: {
+            _id: String,
              name: String,
             calories: Number,
             protein: Number,
@@ -39,6 +42,7 @@ var userDietSchema = new mongoose.Schema({
         },
 
         l: {
+            _id: String,
             name: String,
             calories: Number,
             protein: Number,
@@ -49,6 +53,7 @@ var userDietSchema = new mongoose.Schema({
         },
 
         s: {
+            _id: String,
             name: String,
             calories: Number,
             protein: Number,
@@ -57,7 +62,14 @@ var userDietSchema = new mongoose.Schema({
             sugar: Number,
             sodium: Number,
             
+        },
+        params:{
+            height: Number,
+            weight: Number,
+            age: Number,
+            ethnicity: [String]
         }
+
 
     }],
     current: {
@@ -67,6 +79,7 @@ var userDietSchema = new mongoose.Schema({
         TotalProtein: Number,
         TotalCalorie: Number,
         d: {
+            _id: String,
             name: String,
             calories: Number,
             protein: Number,
@@ -76,7 +89,8 @@ var userDietSchema = new mongoose.Schema({
             sodium: Number,
         },
         eb: {
-             name: String,
+            _id: String,
+            name: String,
             calories: Number,
             protein: Number,
             carbohydrates: Number,
@@ -86,7 +100,8 @@ var userDietSchema = new mongoose.Schema({
         },
 
         b: {
-             name: String,
+            _id: String,
+            name: String,
             calories: Number,
             protein: Number,
             carbohydrates: Number,
@@ -96,6 +111,7 @@ var userDietSchema = new mongoose.Schema({
         },
 
         l: {
+            _id: String,
             name: String,
             calories: Number,
             protein: Number,
@@ -106,6 +122,7 @@ var userDietSchema = new mongoose.Schema({
         },
 
         s: {
+            _id: String,
         	name: String,
             calories: Number,
             protein: Number,
@@ -114,6 +131,12 @@ var userDietSchema = new mongoose.Schema({
             sugar: Number,
             sodium: Number,
             
+        },
+        params:{
+            height: Number,
+            weight: Number,
+            age: Number,
+            ethnicity: [String]
         }
 
     }

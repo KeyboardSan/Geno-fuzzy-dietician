@@ -2,7 +2,7 @@ const RawFood = require('./../../models/RawFood')
 const UserDiet = require('./../../models/UserDiet')
 var _ = require('lodash')
 
-function genetic(user, ethnicity, res) {
+function genetic(user, ethnicity, res, params, session) {
     // Encoding structure of chromosomes
     function chromosome() {
         this.eb = {
@@ -23,10 +23,16 @@ function genetic(user, ethnicity, res) {
     }
     this.calculate = function() {
         var diet;
-
+        var gobalERR = Infinity
+        var globalChromo;
         // Fetching raw food after removing the diesases, allergies and segregating as per veg/non veg and prefered ethnicity
 
         // console.log(user)
+        if(!session.dislike)
+        {
+            session.dislike=[]
+        }
+
         var segregatingArray = {
             'eb': [],
             'b': [],
@@ -47,12 +53,13 @@ function genetic(user, ethnicity, res) {
                 }
             }, {
                 'foodpref': user.profile.foodpref
+            }, {
+                '_id': {
+                    $nin: session.dislike[0]
+                }
             }]
         }, function(err, foods) {
 
-            // console.log("Total Food length" + foods.length)
-
-            // console.log(foods.length)
             foods.forEach(function(foodItem) {
                 foodItem.time.forEach(function(a) {
                         segregatingArray[a].push(foodItem)
@@ -111,10 +118,11 @@ function genetic(user, ethnicity, res) {
                 chromo.TC = TCal
                 chromo.used = false
                 chromo.err = Math.abs(chromo.TF - user.profile.TF) + Math.abs(chromo.TC - user.profile.TC) + Math.abs(chromo.TP - user.profile.TP) + Math.abs(chromo.TCC - user.profile.TC)
-                chromo._id = Math.random()
+                chromo._id = Date.now()
 
                 if (gobalERR > chromo.err) {
                     gobalERR = chromo.err
+                    globalChromo=chromo
                 }
 
                 // /**/  console.log(chromo)
@@ -130,7 +138,7 @@ function genetic(user, ethnicity, res) {
             })
 
             // console.log("Pool length after removing" + pool.length)
-            var gobalERR = Infinity
+            
 
             var workingPool = []
             var count = 0
@@ -171,7 +179,9 @@ function genetic(user, ethnicity, res) {
                     _.remove(workingPool, temp)
 
                 }
-
+                _.sortBy(workingPool,function(chromo){
+                    return chromo.err
+                })
                 // start cross over of 10 elements
                 var childPool = []
                 var len = 0
@@ -224,9 +234,10 @@ function genetic(user, ethnicity, res) {
                     chromo.TC = TCal
                     chromo.used = false
                     chromo.err = Math.abs(chromo.TF - user.profile.TF) + Math.abs(chromo.TC - user.profile.TC) + Math.abs(chromo.TP - user.profile.TP) + Math.abs(chromo.TCC - user.profile.TCC)
-                    chromo._id = Math.random()
+                    chromo._id = Date.now()
                     if (gobalERR > chromo.err) {
                         gobalERR = chromo.err
+                        globalChromo=chromo
                     }
                 })
 
@@ -260,10 +271,12 @@ function genetic(user, ethnicity, res) {
             min = _.minBy(workingPool, function(chromo) {
                 return chromo.err
             });
-            // console.log(min)
-            // console.log(gobalERR)
+            console.log(gobalERR)
+            console.log(min)
+            console.log("The global chormo is")
+            console.log(globalChromo)
 
-
+            min=globalChromo
 
             UserDiet.find({
                 userId: user._id
@@ -278,6 +291,7 @@ function genetic(user, ethnicity, res) {
                             TotalProtein: min.TP,
                             TotalCalorie: min.TC,
                             d: {
+                                _id: min.d._id,
                                 name: min.d.name,
                                 calories: min.d.calories,
                                 protein: min.d.protein,
@@ -287,6 +301,7 @@ function genetic(user, ethnicity, res) {
                                 sodium: min.d.sodium
                             },
                             eb: {
+                                _id: min.eb._id,
                                 name: min.eb.name,
                                 calories: min.eb.calories,
                                 protein: min.eb.protein,
@@ -297,6 +312,7 @@ function genetic(user, ethnicity, res) {
                             },
 
                             b: {
+                                _id: min.b._id,
                                 name: min.b.name,
                                 calories: min.b.calories,
                                 protein: min.b.protein,
@@ -307,6 +323,7 @@ function genetic(user, ethnicity, res) {
                             },
 
                             l: {
+                                _id: min.l._id,
                                 name: min.l.name,
                                 calories: min.l.calories,
                                 protein: min.l.protein,
@@ -317,6 +334,7 @@ function genetic(user, ethnicity, res) {
                             },
 
                             s: {
+                                _id: min.d._id,
                                 name: min.s.name,
                                 calories: min.s.calories,
                                 protein: min.l.protein,
@@ -324,18 +342,21 @@ function genetic(user, ethnicity, res) {
                                 fats: min.s.fats,
                                 sugar: min.s.sugar,
                                 sodium: min.s.sodium
+                            },
+                            params: {
+                                height: params.height,
+                                weight: params.weight,
+                                age: params.age,
+                                ethnicity: ethnicity
                             }
 
                         }
                     })
                     usrDiet.save(function(err, done) {
                         console.log("User Diet Saved")
-                        res.redirect('/');
+                        res.redirect('/viewdiet');
                     });
                 } else {
-                    console.log("In else")
-                    console.log(typeof usr[0].current)
-
 
                     UserDiet.findOneAndUpdate({
                         userId: user._id
@@ -352,6 +373,7 @@ function genetic(user, ethnicity, res) {
                                 TotalProtein: min.TP,
                                 TotalCalorie: min.TC,
                                 d: {
+                                    _id: min.d._id,
                                     name: min.d.name,
                                     calories: min.d.calories,
                                     protein: min.d.protein,
@@ -361,6 +383,7 @@ function genetic(user, ethnicity, res) {
                                     sodium: min.d.sodium
                                 },
                                 eb: {
+                                    _id: min.eb._id,
                                     name: min.eb.name,
                                     calories: min.eb.calories,
                                     protein: min.eb.protein,
@@ -371,6 +394,7 @@ function genetic(user, ethnicity, res) {
                                 },
 
                                 b: {
+                                    _id: min.b._id,
                                     name: min.b.name,
                                     calories: min.b.calories,
                                     protein: min.b.protein,
@@ -381,6 +405,7 @@ function genetic(user, ethnicity, res) {
                                 },
 
                                 l: {
+                                    _id: min.l._id,
                                     name: min.l.name,
                                     calories: min.l.calories,
                                     protein: min.l.protein,
@@ -391,6 +416,7 @@ function genetic(user, ethnicity, res) {
                                 },
 
                                 s: {
+                                    _id: min.s._id,
                                     name: min.s.name,
                                     calories: min.s.calories,
                                     protein: min.l.protein,
@@ -398,6 +424,12 @@ function genetic(user, ethnicity, res) {
                                     fats: min.s.fats,
                                     sugar: min.s.sugar,
                                     sodium: min.s.sodium
+                                },
+                                params: {
+                                    height: params.height,
+                                    weight: params.weight,
+                                    age: params.age,
+                                    ethnicity: ethnicity
                                 }
 
                             }
@@ -407,7 +439,8 @@ function genetic(user, ethnicity, res) {
                         if (err) {
                             console.log(err)
                         }
-                        res.redirect('/')
+                        res.redirect('/viewdiet')
+
                     })
 
 
