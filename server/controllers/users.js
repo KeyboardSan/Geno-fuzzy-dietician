@@ -1,5 +1,6 @@
 var User = require('../models/User')
 var passport = require('passport');
+var nodemailer=require('nodemailer');
 
 exports.postSignup = function(req, res) {
     // console.log(req.body.activity)
