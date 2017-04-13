@@ -57,8 +57,20 @@ function genetic(user, ethnicity, res, params, session) {
                 '_id': {
                     $nin: session.dislike[0]
                 }
+            },{
+                'ethinicity':
+                {
+                    $in:ethnicity
+                }
+            },{
+                'dislikeforever':
+                {
+                    $nin:user.dislikeforever
+                }
             }]
         }, function(err, foods) {
+
+            // console.log(user)
 
             foods.forEach(function(foodItem) {
                 foodItem.time.forEach(function(a) {
@@ -66,6 +78,11 @@ function genetic(user, ethnicity, res, params, session) {
                     })
                     // console.log(it);
             })
+
+            //shuffling the segregating arrays
+            for(var key in segregatingArray){
+                _.shuffle(segregatingArray[key])
+            }
 
             // console.log(" segregatingArray total food count "+ (segregatingArray['eb'].length+segregatingArray['b'].length+segregatingArray['l'].length+segregatingArray['s'].length+segregatingArray['d'].length) )
 

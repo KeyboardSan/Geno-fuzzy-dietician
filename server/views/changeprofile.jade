@@ -1,0 +1,72 @@
+extends ./includes/layout
+block main
+	.row
+		.col.s12
+			h6 Change profile attributes here. Sorry Cannot change Email , Name and password.
+	.row
+		.col.s12
+			.card.card-margin
+				.card-content
+					form(action="/changeprofile" method="post")
+						.row
+							.col.s12.input-field.inline		
+								input#height(type='number' name="height" value=user.profile.height)
+								label(for='height') Height (in kg)
+						.row
+							.col.s12.input-field.inline				
+								input#weight(type='number' name="weight" value=user.profile.weight)
+								label(for='weight') Weight (in cm)
+						.row
+							.col.s12.input-field.inline				
+								input#age(type='number' name="age" value=user.profile.age)
+								label(for='age') Age (in years)
+						.row
+							.col.s12.input-field.inline				
+								.input-field.col.s12
+									select(multiple='' name="ethnicity")
+										option(value='', disabled='') Ethnicity
+										option(value='North') North
+										option(value='South') South
+										option(value='East') East
+										option(value='West') West
+									label(for='ethnicity') Food of which ethincity would you like to have?
+						.row
+							.col.s12
+								input#veg.with-gap(name='foodpref', type='radio', value='veg')
+								label(for='veg') Veg
+
+								input#nonveg.with-gap(name='foodpref', type='radio', value='nonveg')
+								label(for='nonveg') nonveg
+								
+						.row
+							.col.s12
+								select#diseases(multiple='', name='diseases')
+									option(value='NA', disabled='', selected='') Diseases
+									option(value='diabetes') Diabetes
+									option(value='hypertension') Hypertension
+									option(value='') No Diseases
+						.row
+							.col.s12
+								select#allergies(multiple='', name='allergies')
+									option(value='NA', disabled='', selected='') Allergies
+									option(value='Lactose') lactose
+									option(value='') No Allergies
+						.row
+							.col.s12
+								select#activity(name='activity', value='activity')
+									option(value='default', disabled='', selected='') Activity
+									option(value='NA') Little to No Activity
+									option(value='LA') Low Activity
+									option(value='MA') Medium Activity
+									option(value='HA') High Activity
+									option(value='VHA') Very High Activity
+						.row
+							.col.s12
+								select#goal(name='goal')
+									option(value='NA', disabled='', selected='') Goal
+									option(value='LF') Loose Fat
+									option(value='LM') Gain Lean Muscle
+									option(value='MM') Maintenance
+	
+
+						button.btn-flat.modal-action.waves-effect.waves-green.blue-text(type="submit") Calulate					

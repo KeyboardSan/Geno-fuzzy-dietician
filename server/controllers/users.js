@@ -24,7 +24,8 @@ exports.postSignup = function(req, res) {
             allergies: [],
             activity: req.body.activity,
             goal: req.body.goal
-        }
+        },
+        dislikeforever: []
     })
 
     user.profile.ethnicity = user.profile.ethnicity.concat(req.body.ethnicity)
@@ -60,4 +61,135 @@ exports.getLogout = function(req, res) {
     req.logout();
     res.redirect('/');
 
+}
+
+exports.getChangeProfile = function(req, res) {
+    res.render('changeprofile')
+}
+exports.postChangeProfile = function(req, res) {
+
+    // User.findOneAndUpdate({
+    //     '_id': req.user._id
+    // }, {
+
+    // }, function(err, user) {
+    //     console.log(user)
+    // })
+}
+
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'explara.event.invite@gmail.com', //new mail id made for the sake of project
+        pass: 'aakashankitchintan' // by default emails will be sent from this id
+    }
+})
+
+
+exports.cronEBReminder = function() {
+    User.find({}, function(err, users) {
+        users.forEach(function(user) {
+            var textMailBody = htmlMailBody = 'This is a reminder to have your Early BreakFast. Please check the application for the food items. <br> Regards, <br> Team GFD ';
+            var mailOptions = {
+                from: 'Team GFD', // sender address 
+                to: req.body.email, // list of receivers 
+                subject: ' GFD : Reminder: Early BreakFast ', // Subject line 
+                text: textMailBody, // plaintext body alt for html 
+                html: htmlMailBody
+            };
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: ' + info.response);
+            });
+
+        })
+    });
+}
+
+exports.cronBReminder = function() {
+    User.find({}, function(err, users) {
+        users.forEach(function(user) {
+            var textMailBody = htmlMailBody = 'This is a reminder to have your  BreakFast. Please check the application for the food items. <br> Regards, <br> Team GFD ';
+            var mailOptions = {
+                from: 'Team GFD', // sender address 
+                to: req.body.email, // list of receivers 
+                subject: ' GFD : Reminder: BreakFast ', // Subject line 
+                text: textMailBody, // plaintext body alt for html 
+                html: htmlMailBody
+            };
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: ' + info.response);
+            });
+
+        })
+    });
+}
+
+exports.cronLReminder = function() {
+    User.find({}, function(err, users) {
+        users.forEach(function(user) {
+            var textMailBody = htmlMailBody = 'This is a reminder to have your  Lunch. Please check the application for the food items. <br> Regards, <br> Team GFD ';
+            var mailOptions = {
+                from: 'Team GFD', // sender address 
+                to: req.body.email, // list of receivers 
+                subject: ' GFD : Reminder: Lunch ', // Subject line 
+                text: textMailBody, // plaintext body alt for html 
+                html: htmlMailBody
+            };
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: ' + info.response);
+            });
+
+        })
+    });
+}
+exports.cronSReminder = function() {
+    User.find({}, function(err, users) {
+        users.forEach(function(user) {
+            var textMailBody = htmlMailBody = 'This is a reminder to have your  Snacks. Please check the application for the food items. <br> Regards, <br> Team GFD ';
+            var mailOptions = {
+                from: 'Team GFD', // sender address 
+                to: req.body.email, // list of receivers 
+                subject: ' GFD : Reminder: Snacks ', // Subject line 
+                text: textMailBody, // plaintext body alt for html 
+                html: htmlMailBody
+            };
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: ' + info.response);
+            });
+
+        })
+    });
+}
+exports.cronDReminder = function() {
+    User.find({}, function(err, users) {
+        users.forEach(function(user) {
+            var textMailBody = htmlMailBody = 'This is a reminder to have your  Dinner. Please check the application for the food items. <br> Regards, <br> Team GFD ';
+            var mailOptions = {
+                from: 'Team GFD', // sender address 
+                to: req.body.email, // list of receivers 
+                subject: ' GFD : Reminder: Dinner ', // Subject line 
+                text: textMailBody, // plaintext body alt for html 
+                html: htmlMailBody
+            };
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: ' + info.response);
+            });
+
+        })
+    });
 }

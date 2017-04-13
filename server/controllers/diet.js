@@ -2,6 +2,7 @@ var _ = require('lodash')
 var Fuzzy = require('./core/fuzzy')
 var Genetic = require('./core/genetic')
 const UserDiet = require('../models/UserDiet')
+const User = require('../models/User')
 
 exports.getDiet = function(req, res) {
     //fetcht the data and display..
@@ -9,9 +10,17 @@ exports.getDiet = function(req, res) {
     UserDiet.findOne({
         userId: req.user._id
     }, function(err, user) {
-        res.render('viewdiet', {
-            diet: user.current
-        })
+
+        // console.log(user==null)
+        if (user != null) {
+            res.render('viewdiet', {
+                diet: user.current
+            })
+        } else {
+            res.render('viewdiet')
+        }
+
+
     })
 }
 
@@ -152,6 +161,90 @@ exports.getRemoveNow = function(req, res) {
         var genetic = new Genetic(req.user, userDiet.current.params.ethnicity, res, userDiet.current.params, req.session)
         diet = genetic.calculate()
 
+    });
+
+}
+exports.getRemoveForever = function(req, res) {
+
+
+    User.findOneAndUpdate({
+        "_id": req.user._id
+    }, {
+        $push: {
+            'dislikeforever': req.params.id
+        }
+    }, function(err, userasdf) {
+
+        if (err) {
+            console.log("error is " + err)
+        } else {
+
+
+
+            UserDiet.findOne({
+                userId: req.user._id
+            }, function(err, userDiet) {
+
+                // console.log(userDiet.current.params)
+
+                var BMR1 = 10 * userDiet.current.params.weight + 6.25 * userDiet.current.params.height - 5 * userDiet.current.params.age
+                    // console.log(req.user.profile.gender)
+                if (req.user.profile.gender == "male") {
+                    BMR1 = BMR1 + 5;
+                } else {
+
+                    BMR1 = BMR1 - 161
+                }
+
+
+                // Start fuzzification to get the value of BMR2 based on the value of user`s activity.
+                var fuzzy = new Fuzzy()
+                var BMR = fuzzy.fuzzify(BMR1, req.user)
+
+                // console.log(req.user)
+
+                var TC = BMR
+                switch (req.user.profile.goal) {
+                    case 'LF':
+                        req.user.profile.TC = BMR - 400
+                        req.user.profile.TF = 0.60 * req.user.profile.TC * 0.12959782
+                        req.user.profile.TP = 0.35 * req.user.profile.TC * 0.12959782
+                        req.user.profile.TCC = 0.05 * req.user.profile.TC * 0.12959782
+                        break;
+                    case 'LM':
+                        req.user.profile.TC = BMR + 100
+                        req.user.profile.TF = 0.25 * req.user.profile.TC * 0.12959782
+                        req.user.profile.TP = 0.35 * req.user.profile.TC * 0.12959782
+                        req.user.profile.TCC = 0.45 * req.user.profile.TC * 0.12959782
+                        break;
+                    case 'MM':
+                        req.user.profile.TC = BMR
+                        req.user.profile.TF = 0.30 * req.user.profile.TC * 0.12959782
+                        req.user.profile.TP = 0.30 * req.user.profile.TC * 0.12959782
+                        req.user.profile.TCC = 0.40 * req.user.profile.TC * 0.12959782
+                        break;
+                    default:
+                        console.log("default category")
+                }
+
+                // // converting calories to grams as stored in database as 1 calorie is 129.59782 grams.
+                // console.log("Diet details are")
+                // console.log(req.user.profile)
+                // console.log(req.session)
+                var genetic = new Genetic(req.user, userDiet.current.params.ethnicity, res, userDiet.current.params, req.session)
+                diet = genetic.calculate()
+
+            });
+
+
+
+
+
+
+
+
+
+        }
     });
 
 }
