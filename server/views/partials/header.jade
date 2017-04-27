@@ -1,12 +1,12 @@
 nav
 			.nav-wrapper
-				h6.brand-logo(href='/')    Geno-Fuzzy-Dietician
-				|              
+				a.brand-logo(href='/')
+					h4	Geno-Fuzzy-Dietician
 				a.button-collapse(href='#',  data-activates='mobile-demo')
 						i.material-icons  menu
 					ul.right.hide-on-med-and-down
 						li
-							a(href='/')  About  Us
+							a(href='/aboutus')  About  Us
 						if(user)
 							li
 									a(href='/logout')  Logout
@@ -30,7 +30,7 @@ nav
 									a(href="#!email")
 										span.white-text.email #{user.email}
 						li
-							a(href='/')  About  Us
+							a(href='/aboutus')  About  Us
 						if(user)
 							li
 									a(href='/logout')  Logout

@@ -79,6 +79,7 @@ app.post('/forgotpass', homeController.postForgotPass)
 app.get('/changeprofile', userController.getChangeProfile)
 app.post('/changeprofile', userController.postChangeProfile)
 app.post('/changeprofile', userController.postChangeProfile)
+app.get('/aboutus',homeController.getAboutUs)
 
 
 //setting up cron job

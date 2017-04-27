@@ -18,3 +18,14 @@
 {
 	margin-bottom:0px;
 }
+ .footerposition
+ {
+ 	position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+ }
+ .changeprofileoffset
+{
+	margin-bottom: 100px;
+}

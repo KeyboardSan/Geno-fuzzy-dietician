@@ -71,8 +71,8 @@ fs.createReadStream('./server/data/FinalBase.csv')
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'explara.event.invite@gmail.com', //new mail id made for the sake of project
-        pass: 'aakashankitchintan' // by default emails will be sent from this id
+        user: 'aakashdhongade@sfitengg.org', //new mail id made for the sake of project
+        pass: 'AAK_2016' // by default emails will be sent from this id
     }
 })
 
@@ -112,4 +112,7 @@ bcrypt.genSalt(10, function(err, salt) {
  });
 });
 
+}
+exports.getAboutUs=function(req,res){
+	res.render('aboutus')
 }

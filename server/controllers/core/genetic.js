@@ -289,7 +289,7 @@ function genetic(user, ethnicity, res, params, session) {
                 return chromo.err
             });
             console.log(gobalERR)
-            console.log(min)
+            // console.log(min)
             console.log("The global chormo is")
             console.log(globalChromo)
 

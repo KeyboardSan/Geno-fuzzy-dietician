@@ -4,8 +4,8 @@ block main
 		.col.s12
 			h6 Change profile attributes here. Sorry Cannot change Email , Name and password.
 	.row
-		.col.s12
-			.card.card-margin
+		.col.s6.offset-s3
+			.card.card-margin.changeprofileoffset
 				.card-content
 					form(action="/changeprofile" method="post")
 						.row
@@ -69,4 +69,7 @@ block main
 									option(value='MM') Maintenance
 	
 
-						button.btn-flat.modal-action.waves-effect.waves-green.blue-text(type="submit") Calulate					
+						button.btn-flat.modal-action.waves-effect.waves-green.blue-text(type="submit") Calulate	
+	.row
+		.col.s6
+
